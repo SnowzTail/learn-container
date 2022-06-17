@@ -5,11 +5,11 @@ This is an introduction to containers course at Imperial College London
 3 × 2 hour classes
 
 ## The Graduate School logo
-<img src="/images/grad-school-logo.png">
+<img src="assets/grad-school-logo.png">
 
 ## Prerequisites
 
-**NOTE: You are expecting to have some (not necessarily to have many or a lot) basic experience with bash commands, and Python or R programming. We will use basic bash command lines, simple coding in Python and R in the course.** 
+**NOTE: You are expecting to have some (not necessarily to have many or a lot) basic experience with bash commands, and Python or R programming. We will use basic bash command lines, simple coding in Python and R in the course.**
 
 ## Description
 
@@ -22,23 +22,23 @@ This course consists of 3 parts as follows.
 - **Part 1**: Introducing containers, Docker command lines.
   - In this part, you will learn why containers are used, what containers are, and you will get hands-on practice with Docker (the most popular container tool) command lines.
 
-- **Part 2**: Create containers with examples. 
+- **Part 2**: Create containers with examples.
   - In this part, you will get familiar with creating container images in Docker environment. You will learn to compose Dockerfile and build container images through examples including bash, Python and R. You will get hands-on practice as well.
 
 - **Part 3**: Share container images and scale up with singularity.
   - In this part, you will practice how to share your own container images with others using either Docker Hub distribution or other ways. You will also learn how to run images using singularity on high performance computing cluster or cloud.
 
-## Intended learning outcomes (ILOs) 
+## Intended learning outcomes (ILOs)
 
-On completion of this course you will be able to: 
+On completion of this course you will be able to:
 
-- Remember the benefits of using containers for research 
+- Remember the benefits of using containers for research
 - Use the common Docker commands
 - Compose Dockerfiles to build docker containers
 - Manage Docker Hub repository
 - Share Docker container images
 - Interpret common errors and use these to help debug a container
-- Use basic singularity commands to scale up containers on HPC 
+- Use basic singularity commands to scale up containers on HPC
 
 ## Pre-course activities:
 
@@ -65,13 +65,13 @@ Please try to install the appropriate software from the list below depending on 
   or failing that;
 
   - Install the [Docker Toolbox (Windows)](https://docs.docker.com/toolbox/toolbox_install_windows/).
-  
+
 - Apple macOS, either:
   - Try this first, although it will not work with older versions of macOS. Install the [Docker Desktop (Mac)](https://hub.docker.com/editions/community/docker-ce-desktop-mac), [YouTube video](https://youtu.be/BJxGr2Xa6Zk)
   or failing that:
 
   - Install the [Docker Toolbox (Mac)](https://docs.docker.com/toolbox/toolbox_install_mac/).
-  
+
 - Linux: there are too many varieties of Linux to give precise instructions here, but hopefully you can locate documentation for getting Docker installed on your Linux distribution. It may already be installed. If it is not already installed on your system, see:
   - [Docker Engine on CentOS](https://docs.docker.com/install/linux/docker-ce/centos/)
   - [Docker Engine on Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
@@ -90,9 +90,9 @@ Consider Python: a widely used programming language for analysis. Many Python us
 
   - Python 2.7 and Python 3 programs are generally **incompatible**: Not all packages can be installed in the same Python environment at their most up to date versions due to conflicts in the shared dependencies
     - Python 2.7 has now been deprecated but there are still many legacy programs out there
-    
+
   - Different versions of Python tools may give slightly different outputs and/or results
-  
+
 All of the above discussion is **just** about ***Python***. Many people use many different tools and pieces of software during their research workflow all of which may have dependency issues. Some software may just depend on the version of the operating system you’re running or be more like Python where the languages change over time, and depend on an enormous set of software libraries written by unrelated software development teams.
 
 **What if** you wanted to distribute a software tool that automated interaction between R and Python. Both of these language environments have independent version and software dependency lineages. As the number of software components such as R and Python increases, this can rapidly lead to a combinatorial explosion in the number of possible configurations, only some of which will work as intended. This situation is sometimes informally termed “dependency hell”.
@@ -113,27 +113,27 @@ Thankfully there are ways to get underneath (a lot of) this mess: containers to 
 
 ### What are containers?
 
-The term “container” can be usefully considered with reference to shipping containers. Before shipping containers were developed, packing and unpacking cargo ships was time consuming, and error prone, with high potential for different clients’ goods to become mixed up. 
+The term “container” can be usefully considered with reference to shipping containers. Before shipping containers were developed, packing and unpacking cargo ships was time consuming, and error prone, with high potential for different clients’ goods to become mixed up.
 
-<img src="/images/ancient_dock1.png">
+<img src="assets/ancient_dock1.png">
 
-<img src="/images/ancient_dock2.png">
+<img src="assets/ancient_dock2.png">
 
 Since shipping containers were introduced, the shipping has become much better organized.
 
-<img src="/images/modern_dock1.png">
+<img src="assets/modern_dock1.png">
 
-<img src="/images/modern_dock2.png">
+<img src="assets/modern_dock2.png">
 
 Software containers standardise the packaging of a complete software system (the lightweight virtual machine): you can drop a container into a container host, and it should “just work”.
 
-<img src="/images/vm_containers.png">
+<img src="assets/vm_containers.png">
 
 On this course, we will be using Linux containers - all of the containers we will meet are based on the Linux operating system in one form or another. However, the same Linux containers we create can run on:
 
 - MacOS;
 - Microsoft Windows;
-- Linux; 
+- Linux;
 and
 - The Cloud
 We should certainly see people using the same containers on macOS and Windows today.
@@ -147,7 +147,7 @@ One complication with using a virtual environment such as a container is that th
 - **Host file systems**: these are directories mapped from the host into the container to allow the container to access data on the host system. Some container systems (e.g. Singularity) map particular directories into the container by default while others (e.g. Docker) do not generally do this (needs to be mapped manually). Note that the location (or path) to the directories in the container is not necessarily the same as that in the host. The command you use to start the container will usually provide a way to map host directories to directories in the container.
 
 This is illustrated in the diagram below:
-<img src="/images/container_file_system.png">
+<img src="assets/container_file_system.png">
 
 ### Docker and its terminology
 
@@ -166,10 +166,10 @@ This is illustrated in the diagram below:
 
 ### Basic docker commands
 
-1. Once your Docker application is running, open a shell (terminal) window, and run the following command to check that Docker is installed and the command line tools are working correctly. 
+1. Once your Docker application is running, open a shell (terminal) window, and run the following command to check that Docker is installed and the command line tools are working correctly.
 
      `docker --version`
-  
+
 2. A command that checks that the virtual machine host is running is the Docker container list command.
 
       `docker container ls`
@@ -179,8 +179,8 @@ This is illustrated in the diagram below:
 To create and run containers from named Docker images you use the docker run command. Open a shell window if you do not already have one open and try the following docker run invocation. Note that it does not matter what your current working directory is.
 
 `docker run hello-world`
-      
-Try: 
+
+Try:
 
 run the above command again and observe the difference.
 
@@ -192,13 +192,13 @@ run the above command again and observe the difference.
 Run:
 
 `docker image ls`
-      
+
 5. Remove docker image(s)
 
-If you need to reclaim disk space, you can remove image files. The images and their corresponding containers can start to take up a lot of disk space if you don’t clean them up occasionally. If you want to remove an image, you will need to find out details such as the image ID or name of the repository. 
+If you need to reclaim disk space, you can remove image files. The images and their corresponding containers can start to take up a lot of disk space if you don’t clean them up occasionally. If you want to remove an image, you will need to find out details such as the image ID or name of the repository.
 
 `docker image rm hello-world`
-    
+
 if you get the following error message (example):
 
 `Error response from daemon: conflict: unable to remove repository reference "hello-world" (must force) - container a6d14ab49884 is using its referenced image bf756fb1ae65`
@@ -212,7 +212,7 @@ Then you need find what containers are depending on the image(s) to remove it fr
 then
 `docker container rm ID` or `docker container rm container_name`
 
-NOTE: 
+NOTE:
 
 If you want to remove all exited containers at once you can use the docker containers prune command.
 
@@ -230,7 +230,7 @@ This command assumes you are using a bash (or compatible) shell. If you happen t
 
 ### More interaction with Docker
 
-Often, you will need to use containers to run specific commands, analyses or tasks (as we have seen with the “hello-world” example above). Sometimes, however, you would prefer to have a container running and to get interactive access so you can run commands directly within the container yourself, or debug your docker image. 
+Often, you will need to use containers to run specific commands, analyses or tasks (as we have seen with the “hello-world” example above). Sometimes, however, you would prefer to have a container running and to get interactive access so you can run commands directly within the container yourself, or debug your docker image.
 
 To do so, you need to add flag(s) to a docker image when you run it.
 
@@ -278,7 +278,7 @@ A docker container is by default isolated from the host system. If you want to k
 `docker run --rm -t -i -v ${PWD}:/data ubuntu "/bin/bash"`
 
 ## Part2: Generate Docker images
- 
+
 ### Create own Docker images
 
 Where to get help: the [Docker Community Forums](https://forums.docker.com/), [the Docker Community Slack](https://dockr.ly/slack), or [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=docker).
@@ -309,11 +309,11 @@ Example 1: Compose one Dockerfile and one bash script
 - Dockerfile contains:
 
 ```
-FROM ubuntu 
+FROM ubuntu
 
-ADD print.sh ./ 
+ADD print.sh ./
 
-RUN chmod a+x ./print.sh 
+RUN chmod a+x ./print.sh
 
 CMD ["./print.sh"]
 ```
@@ -338,9 +338,9 @@ Example 2: Compose one Dockerfile with a simple Python code.
 ```
 FROM ubuntu
 
-RUN apt update && apt install -y python3 
+RUN apt update && apt install -y python3
 
-ADD py_test.py ./ 
+ADD py_test.py ./
 
 CMD ["python", "py_test.py"]
 ```
@@ -397,7 +397,7 @@ Example 4: Compose one Dockerfile with a R code. This example helps to understan
 ```
 FROM ubuntu:bionic
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y r-base && \
 
@@ -433,16 +433,24 @@ FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Specify working directory
 WORKDIR /usr/local/src
 
 RUN apt update && apt install -y r-base && \
 
-    R -e "install.packages('dplyr', repos='http://cran.r-project.org')" 
+    R -e "install.packages('dplyr', repos='http://cran.r-project.org')"
 
 ADD test.r ./
 
 ENTRYPOINT ["Rscript", "test.r"]
 ```
+
+The ENTRYPOINT instruction looks almost similar to the CMD instruction. However, the main highlighting difference between them is that it will not ignore any of the parameters that you have specified in the Docker run command (CLI parameters).
+
+The ENTRYPOINT specifies a command that will always be executed when the container starts. The CMD specifies arguments that will be fed to the ENTRYPOINT.
+
+To conclude, if you want to specify default arguments and want it to be overwritten on specifying CLI arguments, use CMD commands. And if you want to run a container with the condition that a particular command is always executed, use ENTRYPOINT. RUN is simply used to build additional image layers over the base image.
+
 
 - test.r  contains:
 ```
@@ -509,7 +517,7 @@ import sys,os
 
 import pandas as pd
 
- 
+
 
 args = sys.argv
 
@@ -517,13 +525,13 @@ input = args[1]
 
 output = args[2]+"output.csv"
 
- 
+
 
 df = pd.read_csv(input)
 
 print(df)
 
- 
+
 
 data = { 'Company' : ['VW','Toyota','Renault','KIA','Tesla'], 'Cars Sold (millions)' : [10.8,10.7,10.3,7.4,0.25], 'Best Selling Model' : ['Golf','RAV4','Clio','Forte','Model 3']}
 
@@ -561,7 +569,7 @@ Try: Create a new docker image based on the existing image from example 6. In th
 
 ### Share Docker images
 
-Docker engine saves its virtual image data in intricate locations. For example 
+Docker engine saves its virtual image data in intricate locations. For example
 
 in MacOS,
 
@@ -569,9 +577,9 @@ in MacOS,
 
 and the data in the directory is also hard to understand because the data look like:
 
-<img src="/images/docker_image_location_mac.png">
+<img src="assets/docker_image_location_mac.png">
 
-It's incredibly difficult to know what needs to be copied in order to use your own docker images on another computer. 
+It's incredibly difficult to know what needs to be copied in order to use your own docker images on another computer.
 
 Solution: use `docker save` command.
 
@@ -599,7 +607,7 @@ Step 1. create your own docker image.
 
 Step 2. send file to your peer. (By fileexchange at Imperial College, or Google Drive, Dropbox, OneDrive etc).
 
-Step 3. Your peer load received image into docker and test run. 
+Step 3. Your peer load received image into docker and test run.
 
 ### Docker hub
 
@@ -615,12 +623,12 @@ Share docker images via Docker Hub.
     - for example: `docker tag r_docker2 jianlianggao/r_docker2:20210423`
 - Push docker images onto Docker Hub
     - for example: `docker push jianlianggao/r_docker2`
-    
+
 2. Download docker images from Docker Hub
 
-- Use command: `docker pull` 
-    - for example: `docker pull jianlianggao/r_docker2` 
-    
+- Use command: `docker pull`
+    - for example: `docker pull jianlianggao/r_docker2`
+
 NOTE: be careful about the tags.
 
 
@@ -632,7 +640,7 @@ Step 1. Create your own docker image.
 
 Step 2. Push docker image to Docker Hub.
 
-Step 3. Your peer downloads your image from Docker Hub and tests run. 
+Step 3. Your peer downloads your image from Docker Hub and tests run.
 
 ### Singularity
 
@@ -676,27 +684,27 @@ module load singular/3.1.1
 
 singularity run -B /rds/general/user/jgao/home/singularity_test:/data /rds/general/user/jgao/home/singularity_test/pypd_docker.simg /data/dataset/CW_example_data.csv /data/output${PBS_ARRAY_INDEX}/
 ```
-  
+
 
 ## Part4: Acknowledgement
 
-Many thanks to 
+Many thanks to
 [Dr. Jeremy Cohen](https://www.imperial.ac.uk/people/jeremy.cohen), who provided course context and idea. If you are interested in more courses about containers, please click on Dr. Cohen's name to find his contact.
 
 Dr. Katerina Michalickova and Dr. Magdalena Jara, who discussed with me and provided comments on the design of this course.
 
-### Concetps not included
+### Concepts not included
 
 #### Docker-compose
-  
-This workshop does not include docker-compose. If you are interested in docker-compose, please have a look at 
+
+This workshop does not include docker-compose. If you are interested in docker-compose, please have a look at
 
 https://docs.docker.com/compose/gettingstarted/
 
 and do more research if needed. Or feel free to speak to me by email/Teams
-  
+
 #### Nextflow
-  
+
 You may have also heard about nextflow. It is not covered in this course. If you are keen to know about it, please feel free to start from [Jack Gisby's case study](https://github.com/ImperialCollegeLondon/ReCoDE_rnaseq_pipeline).
 
 
